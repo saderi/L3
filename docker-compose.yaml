@@ -1,0 +1,68 @@
+version: '3.5'
+
+services:
+  # |-|-| service_bezanim |-|-|
+  web_server:
+    container_name: web_server
+    build:
+      context: ./php7
+    image: php:7.1.12-custom
+    volumes:
+      - ${YOUR_PROJECT_PATH:-./html}:/var/www/html
+    ports:
+      - '80:80'
+    networks:
+      - my-stack-network
+    restart: always
+
+  ################################
+  # |-|-| Database container |-|-|
+  ################################
+
+  # |-|-| mysql container |-|-|
+  mariadb10_0:
+    container_name: mysql_server
+    image: mariadb:${MARIADB_VERSION:-10.0.33}
+    hostname: mariadbdev
+    networks:
+      - my-stack-network
+    volumes:
+      - ${MYSQL_DATA_PATH:-./mysql_data}:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+    restart: always
+
+  # |-|-| phpMyAdmin container |-|-|
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - ${PHPMYADMIN_ACCESS_PORT:-8086}:80
+    networks:
+      - my-stack-network
+    restart: always
+  
+  # |-|-| mongoDB container |-|-|
+  mongo_db:
+    container_name: mongo_db
+    image: mongo:3.6.0-jessie
+    volumes:
+      - ${MONGOBD_DATA_PATH:-./mongodb_data}:/data/db
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-admin123}
+    command: mongod --auth
+    networks:
+      - my-stack-network
+    restart: always
+
+networks:
+  my-stack-network:
+   name: ${NETWORK_NAME:-my-stack-network}
