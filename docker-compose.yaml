@@ -4,9 +4,7 @@ services:
   # |-|-| web_server container |-|-|
   web_server:
     container_name: web_server
-    build:
-      context: ./php7
-    image: php:7.1.12-custom
+    image: saderi/lemmpn
     volumes:
       - ${YOUR_PROJECT_PATH:-./html}:/var/www/html
     ports:
@@ -22,7 +20,7 @@ services:
   # |-|-| mysql container |-|-|
   mysql_server:
     container_name: mysql_server
-    image: mariadb:${MARIADB_VERSION:-10.0.33}
+    image: mariadb:${MARIADB_VERSION:-10.2.20}
     hostname: mariadbdev
     networks:
       - my-stack-network
