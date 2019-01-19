@@ -20,7 +20,7 @@ services:
   # |-|-| mysql container |-|-|
   mysql_server:
     container_name: mysql_server
-    image: mariadb:${MARIADB_VERSION:-10.2.20}
+    image: mariadb:${MARIADB_VERSION:-10.2.21}
     hostname: mariadbdev
     networks:
       - my-stack-network
@@ -48,7 +48,7 @@ services:
   # |-|-| mongoDB container |-|-|
   mongo_db:
     container_name: mongo_db
-    image: mongo:3.6.0-jessie
+    image: mongo:${MONGO_VERSION:-4.1.6}
     volumes:
       - ${MONGOBD_DATA_PATH:-mongodb}:/data/db
     ports:
