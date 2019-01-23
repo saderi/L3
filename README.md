@@ -1,5 +1,5 @@
 
-# Docker / PHP / Bginx / MongoDB / MySQL
+# Docker / PHP / Nginx / MongoDB / MySQL
 This is a docker-compose file for start nginx ,php-fpm ,mongoDB and mysql.
 
 
@@ -28,6 +28,7 @@ You can config the following environment variables for create and start containe
 * `YOUR_PROJECT_PATH`, the default value is  `./html`
 * `MARIADB_VERSION`, the default value is `10.2.21`
 * `MYSQL_DATA_PATH`, the default value is `mysql` # use volume by default, you can change it if you want use specify path.
+* `WEBROOT`, the default value is `/var/www/html`
 * `MYSQL_ROOT_PASSWORD`, the default value is `root`
 * `PHPMYADMIN_ACCESS_PORT`, the default value is `8086`
 * `MONGOBD_DATA_PATH`, the default value is `mongodb` # use volume by default, you can change it if you want use specify path.

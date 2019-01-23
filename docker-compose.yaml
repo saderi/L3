@@ -7,6 +7,8 @@ services:
     image: saderi/lemmpn
     volumes:
       - ${YOUR_PROJECT_PATH:-./html}:/var/www/html
+    environment:
+      - WEBROOT=/var/www/html
     ports:
       - '80:80'
     networks:
