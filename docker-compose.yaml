@@ -28,8 +28,6 @@ services:
       - my-stack-network
     volumes:
       - ${MYSQL_DATA_PATH:-mysql}:/var/lib/mysql
-    ports:
-      - '3306:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
     restart: always
@@ -53,8 +51,6 @@ services:
     image: mongo:${MONGO_VERSION:-4.1.6}
     volumes:
       - ${MONGOBD_DATA_PATH:-mongodb}:/data/db
-    ports:
-      - '27017:27017'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-admin}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-admin123}
